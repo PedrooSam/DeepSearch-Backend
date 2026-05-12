@@ -1,0 +1,54 @@
+=======================================================
+  RELATÓRIO DE GERAÇÃO DE CASOS NEGATIVOS
+=======================================================
+
+Arquivo de entrada  : c:\Users\gabri\Desktop\DeepSearch-Backend\projeto\dados\dataset_meteorologia_enriquecido.csv
+Arquivo de saída    : c:\Users\gabri\Desktop\DeepSearch-Backend\projeto\dados\dataset_completo.csv
+
+Positivos totais    : 2560
+Positivos válidos   : 2399
+Negativos gerados   : 2399
+Sem par (descartados): 0
+
+Total final         : 4959 linhas
+  Positivos (1)     : 2560
+  Negativos (0)     : 2399
+
+── Deslocamentos utilizados ─────────────────────────
+  180 dias (futuro ):  2349 casos
+  180 dias (passado):    47 casos
+   90 dias (futuro ):     3 casos
+
+── Distribuição dos negativos por país ──────────────
+  USA                 :  1490
+  AUSTRALIA           :   505
+  SOUTH AFRICA        :   279
+  BRAZIL              :    97
+  MEXICO              :    28
+
+── Distribuição dos negativos por atividade ─────────
+  Surfing                  :   989
+  Swimming                 :   418
+  Wading                   :   175
+  Fishing                  :   152
+  Spearfishing             :   113
+  Bodyboarding             :   112
+  Unknown                  :   104
+  Snorkeling               :    58
+  Kayaking                 :    58
+  Scuba Diving             :    55
+  Diving                   :    46
+  Shark Interaction        :    41
+  Free Diving              :    29
+  Paddleboarding           :    27
+  Boat / Vessel            :    15
+  Research / Filming       :     5
+  Other / Unknown          :     2
+
+── Nota metodológica ────────────────────────────────
+Os casos negativos foram gerados deslocando a data de cada
+ataque confirmado em ±180/90/270/365 dias, mantendo o mesmo
+local (Country + Area) e atividade. Apenas datas sem nenhum
+ataque registrado no dataset foram aceitas como negativas.
+Dados meteorológicos reais devem ser coletados via Open-Meteo
+para as datas geradas (use enriquecer_meteorologia.py).
