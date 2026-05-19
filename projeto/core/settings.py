@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/6.0/ref/settings/
 """
 
+from datetime import timedelta
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -37,7 +38,41 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rest_framework',
+    'djoser',
+    'drf_spectacular',
+    'apps.incidents',
+    'apps.beaches',
+    'apps.forecasts',
+    'apps.ml',
+    'apps.risk',
 ]
+
+REST_FRAMEWORK = {
+    # Implementa autenticação jwt
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    ),
+    # Define o tempo de validade dos tokens de autenticação
+    'ACCESS_TOKEN_LIFETIME': timedelta(hours=2),
+    'REFRESH_TOKEN_LIFETIME': timedelta(days=7),
+
+    # Define a autenticação por token como padrão
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.IsAuthenticated',
+    ),
+
+    # Configuração da classe padrão de paginação para classe customizada
+    'DEFAULT_PAGINATION_CLASS': 'utils.pagination.PaginacaoCustomizada',
+
+    # Configuração do drf spectacular
+    'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
+
+    # Configuração de filtros padrão usando django-filters
+    'DEFAULT_FILTER_BACKENDS': [
+        'django_filters.rest_framework.DjangoFilterBackend',
+    ]
+}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
