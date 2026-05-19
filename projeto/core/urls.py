@@ -16,6 +16,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import include, path
+from drf_spectacular.views import SpectacularAPIView, SpectacularSwaggerView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -29,5 +30,6 @@ urlpatterns = [
     path('auth/', include('djoser.urls.jwt')),
 
     # URLs internas do projeto
-    path('api/', include('incidents.urls')),
+    path('api/', include('apps.incidents.urls')),
+    path('api/', include('apps.beaches.urls')),
 ]

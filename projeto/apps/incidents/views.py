@@ -1,4 +1,5 @@
 from rest_framework import viewsets
+from drf_spectacular.utils import extend_schema
 from .models import Incident
 from .serializers import IncidentSerializer
 
