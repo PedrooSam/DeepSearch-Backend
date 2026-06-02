@@ -23,6 +23,7 @@ export default function RootLayout({
             </div>
             <nav style={{ display: 'flex', gap: '1rem' }}>
               <Link href="/" className="btn btn-secondary">Dashboard</Link>
+              <Link href="/mapa" className="btn btn-secondary">Mapa de Risco</Link>
               <Link href="/nova" className="btn btn-primary">+ Nova Incidência</Link>
             </nav>
           </header>
