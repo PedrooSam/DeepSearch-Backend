@@ -18,6 +18,8 @@ geopy==2.4.1
 idna==3.14
 inflection==0.5.1
 joblib==1.5.3
+mlflow==2.22.0
+matplotlib==3.10.3
 jsonschema==4.26.0
 jsonschema-specifications==2025.9.1
 numpy==2.4.4

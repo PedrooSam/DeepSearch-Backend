@@ -403,7 +403,8 @@ def train():
     for name, imp in fi:
         print(f"  {name:25s}: {imp:.4f}")
 
-    return model, activity_encoder
+    metrics = {"MAE": mae, "R2": r2}
+    return model, activity_encoder, metrics
 
 
 # ---------------------------------------------------------------------------
