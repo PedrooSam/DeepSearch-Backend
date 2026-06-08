@@ -22,7 +22,8 @@ export default function RootLayout({
               <p>Monitoramento de Praias e Incidências</p>
             </div>
             <nav style={{ display: 'flex', gap: '1rem' }}>
-              <Link href="/" className="btn btn-secondary">Dashboard</Link>
+              <Link href="/dashboard" className="btn btn-secondary">Dashboard</Link>
+              <Link href="/" className="btn btn-secondary">Histórico</Link>
               <Link href="/mapa" className="btn btn-secondary">Mapa de Risco</Link>
               <Link href="/nova" className="btn btn-primary">+ Nova Incidência</Link>
             </nav>

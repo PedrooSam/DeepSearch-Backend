@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, Suspense } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 
 interface Incident {
@@ -18,6 +18,19 @@ interface Beach {
 }
 
 export default function Dashboard() {
+  return (
+    <Suspense fallback={
+      <div style={{ textAlign: 'center', padding: '4rem 0' }}>
+        <div className="loading-spinner"></div>
+        <p>Carregando histórico...</p>
+      </div>
+    }>
+      <IncidentList />
+    </Suspense>
+  );
+}
+
+function IncidentList() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const beachFilter = searchParams.get('beach');
