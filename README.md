@@ -1,6 +1,6 @@
 # DeepSearch — Predição de Risco de Ataque de Tubarão
 
-> **Disciplina:** Machine Learning I e Projeto 3
+> **Disciplina:** Machine Learning e Projeto 6
 > **Instituição:** CESAR School
 > **Período:** 2026.1
 
