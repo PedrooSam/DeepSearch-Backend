@@ -6,15 +6,15 @@
 
 ## Membros do grupo
 
-<!-- Preencher com nomes e usuários GitHub -->
-| Nome | GitHub |
-|------|--------|
-| Felipe França | [FelipeARFranca](https://github.com/FelipeARFranca) |
-| Felipe Matias | [Zibec](https://github.com/Zibec) |
-| Gabriel Landim | [GabrielQlandim](https://github.com/Gabrielqlandim) |
-| Luis Gustavo | [Luis-Gustavo-Melo](https://github.com/Luis-Gustavo-Melo) |
-| Pedro Sampaio | [PedrooSam](https://github.com/PedrooSam) |
-| Manuela Amorim | [Manuelaamorim](https://github.com/Manuelaamorim) |
+| Nome           | GitHub                                                 |
+| -------------- | ------------------------------------------------------ |
+| Felipe França | [FelipeARFranca](https://github.com/FelipeARFranca)       |
+| Felipe Matias  | [Zibec](https://github.com/Zibec)                         |
+| Gabriel Landim | [GabrielQlandim](https://github.com/Gabrielqlandim)       |
+| Luis Gustavo   | [Luis-Gustavo-Melo](https://github.com/Luis-Gustavo-Melo) |
+| Pedro Sampaio  | [PedrooSam](https://github.com/PedrooSam)                 |
+| Manuela Amorim | [Manuelaamorim](https://github.com/Manuelaamorim)         |
+
 ## Sobre a solução
 
 [DeepSearch](https://sites.google.com/cesar.school/sharkbyte?usp=sharing)
@@ -22,6 +22,7 @@
 O DeepSearch é uma solução completa de Machine Learning para predição de risco de ataques de tubarão em praias. O sistema combina dados ambientais (temperatura do mar, maré, clima, horário) com o histórico de incidentes para calcular, em tempo real, um score de risco entre 0 e 1.
 
 A solução é composta por:
+
 - **Backend Django** — API REST com endpoint de predição
 - **Frontend Next.js** — Mapa interativo de risco com Leaflet
 - **MLflow** — Rastreamento de experimentos e versionamento de modelos
@@ -66,11 +67,11 @@ docker compose up --build
 
 Após o build, os serviços ficam disponíveis em:
 
-| Serviço | URL |
-|---------|-----|
-| Backend (API) | http://localhost:8000 |
-| Frontend | http://localhost:3000 |
-| MLflow | http://localhost:5000 |
+| Serviço       | URL                        |
+| -------------- | -------------------------- |
+| Backend (API)  | http://localhost:8000      |
+| Frontend       | http://localhost:3000      |
+| MLflow         | http://localhost:5000      |
 | Swagger (docs) | http://localhost:8000/docs |
 
 ### 2. Treinar os modelos com MLflow
@@ -84,10 +85,10 @@ python src/train.py
 
 O script treina 2 modelos em 2 experimentos separados e registra tudo no MLflow:
 
-| Experimento | Modelo | Busca de hiperparâmetros |
-|-------------|--------|--------------------------|
-| SharkRisk - Random Forest | Random Forest | RandomizedSearchCV |
-| SharkRisk - Decision Tree | Decision Tree | RandomizedSearchCV |
+| Experimento               | Modelo        | Busca de hiperparâmetros |
+| ------------------------- | ------------- | ------------------------- |
+| SharkRisk - Random Forest | Random Forest | RandomizedSearchCV        |
+| SharkRisk - Decision Tree | Decision Tree | RandomizedSearchCV        |
 
 Acesse http://localhost:5000 para comparar os experimentos, métricas e modelos salvos.
 
@@ -107,8 +108,8 @@ docker compose down
 
 ## Modelos treinados
 
-| Modelo | Estratégia de busca | Validação |
-|--------|--------------------|-----------| 
+| Modelo        | Estratégia de busca         | Validação               |
+| ------------- | ---------------------------- | ------------------------- |
 | Random Forest | RandomizedSearchCV (20 iter) | Holdout 80/20 + CV 5-fold |
 | Decision Tree | RandomizedSearchCV (20 iter) | Holdout 80/20 + CV 5-fold |
 
