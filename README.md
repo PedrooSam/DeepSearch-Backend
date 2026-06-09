@@ -27,8 +27,6 @@ A solução é composta por:
 
 ```
 /
-├── data/                     # Dados brutos e processados
-├── notebooks/                # EDA e experimentos
 ├── src/
 │   └── train.py              # Script de treinamento com MLflow
 ├── projeto/                  # Backend Django
@@ -39,10 +37,11 @@ A solução é composta por:
 │   │   ├── ml/               # Endpoint de predição
 │   │   └── risk/             # Avaliação de risco
 │   └── dados/
-│       ├── heuristicas.py    # Pipeline de features e treinamento
-│       ├── avaliacao_modelo.py
-│       └── modelo_risco.pkl  # Modelo treinado
-├── frontend/                 # Frontend Next.js
+│       ├── heuristicas.py    # Pipeline de features e score heurístico
+│       ├── avaliacao_modelo.py  # Avaliação visual do modelo (6 gráficos)
+│       ├── dataset_tratado_final.csv
+│       └── modelo_risco.pkl  # Modelo treinado (gerado pelo train.py)
+├── frontend/                 # Frontend Next.js — mapa interativo
 ├── mlruns/                   # Experimentos MLflow (gerado automaticamente)
 ├── Dockerfile
 ├── docker-compose.yml
@@ -79,16 +78,24 @@ pip install mlflow matplotlib scikit-learn pandas joblib
 python src/train.py
 ```
 
-O script treina 4 modelos em 2 experimentos e registra tudo no MLflow:
+O script treina 2 modelos em 2 experimentos separados e registra tudo no MLflow:
 
-| Experimento | Modelos |
-|-------------|---------|
-| SharkRisk - Modelos Base | Decision Tree (GridSearchCV), KNN |
-| SharkRisk - Modelos Ensemble | Random Forest (RandomizedSearchCV), AdaBoost |
+| Experimento | Modelo | Busca de hiperparâmetros |
+|-------------|--------|--------------------------|
+| SharkRisk - Random Forest | Random Forest | RandomizedSearchCV |
+| SharkRisk - Decision Tree | Decision Tree | RandomizedSearchCV |
 
 Acesse http://localhost:5000 para comparar os experimentos, métricas e modelos salvos.
 
-### 3. Parar os containers
+### 3. Gerar avaliação visual do modelo
+
+```bash
+python projeto/dados/avaliacao_modelo.py
+```
+
+Gera `projeto/dados/avaliacao_modelo.png` com 6 gráficos: Predito vs Real, Resíduos vs Predito, Distribuição dos Resíduos, Q-Q Plot, Importância das Features e CDF do Erro Absoluto.
+
+### 4. Parar os containers
 
 ```bash
 docker compose down
@@ -98,12 +105,17 @@ docker compose down
 
 | Modelo | Estratégia de busca | Validação |
 |--------|--------------------|-----------| 
-| Decision Tree | GridSearchCV | Holdout + CV 5-fold |
-| KNN | Parâmetros fixos | Holdout + CV 5-fold |
-| Random Forest | RandomizedSearchCV | Holdout + CV 5-fold |
-| AdaBoost | Parâmetros fixos | Holdout + CV 5-fold |
+| Random Forest | RandomizedSearchCV (20 iter) | Holdout 80/20 + CV 5-fold |
+| Decision Tree | RandomizedSearchCV (20 iter) | Holdout 80/20 + CV 5-fold |
 
 ## Métricas registradas no MLflow
 
+- `cv_r2_mean` — R² médio da validação cruzada 5-fold (sobre o treino)
+- `test_MAE` — Mean Absolute Error no holdout
+- `test_R2` — R² no holdout
+
+## Métricas adicionais (avaliacao_modelo.py)
+
+Calculadas sobre treino e teste e exibidas nos gráficos:
+
 - MAE, MSE, RMSE, R², MAPE, Explained Variance Score
-- Cross-validation R² médio e desvio padrão (5-fold)
