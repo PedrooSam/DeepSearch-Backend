@@ -14,10 +14,10 @@
 | Gabriel Landim | [GabrielQlandim](https://github.com/Gabrielqlandim) |
 | Luis Gustavo | [Luis-Gustavo-Melo](https://github.com/Luis-Gustavo-Melo) |
 | Pedro Sampaio | [PedrooSam](https://github.com/PedrooSam) |
-| Manuela Cavalcanti | [FelipeARFranca](https://github.com/FelipeARFranca) |
+| Manuela Amorim | [Manuelaamorim](https://github.com/Manuelaamorim) |
 ## Sobre a solução
 
-<!-- Adicionar link do Google Sites quando disponível -->
+[DeepSearch](https://sites.google.com/cesar.school/sharkbyte?usp=sharing)
 
 O DeepSearch é uma solução completa de Machine Learning para predição de risco de ataques de tubarão em praias. O sistema combina dados ambientais (temperatura do mar, maré, clima, horário) com o histórico de incidentes para calcular, em tempo real, um score de risco entre 0 e 1.
 
