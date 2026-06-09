@@ -32,6 +32,9 @@ A solução é composta por:
 
 ```
 /
+├── notebooks/
+│   ├── visualizações.ipynb   # Análise Exploratória de Dados (com 7 visualizações)
+│   └── eda.png               # Figura gerada pelo visualizações.ipynb
 ├── src/
 │   └── train.py              # Script de treinamento com MLflow
 ├── projeto/                  # Backend Django
@@ -92,7 +95,13 @@ O script treina 2 modelos em 2 experimentos separados e registra tudo no MLflow:
 
 Acesse http://localhost:5000 para comparar os experimentos, métricas e modelos salvos.
 
-### 3. Gerar avaliação visual do modelo
+### 3. Gerar o EDA
+
+Abra e execute o notebook `notebooks/visualizações.ipynb` no Jupyter ou VS Code.
+
+Gera `notebooks/eda.png` com 7 visualizações: distribuição por país, evolução temporal, atividades mais envolvidas, gravidade dos ferimentos, temperatura do mar por país, correlação entre variáveis ambientais e proporção fatal vs não fatal por país.
+
+### 4. Gerar avaliação visual do modelo
 
 ```bash
 python projeto/dados/avaliacao_modelo.py
