@@ -9,8 +9,12 @@
 <!-- Preencher com nomes e usuários GitHub -->
 | Nome | GitHub |
 |------|--------|
-| A preencher | @usuario |
-
+| Felipe França | [FelipeARFranca](https://github.com/FelipeARFranca) |
+| Felipe Matias | [Zibec](https://github.com/Zibec) |
+| Gabriel Landim | [GabrielQlandim](https://github.com/Gabrielqlandim) |
+| Luis Gustavo | [Luis-Gustavo-Melo](https://github.com/Luis-Gustavo-Melo) |
+| Pedro Sampaio | [PedrooSam](https://github.com/PedrooSam) |
+| Manuela Cavalcanti | [FelipeARFranca](https://github.com/FelipeARFranca) |
 ## Sobre a solução
 
 <!-- Adicionar link do Google Sites quando disponível -->
