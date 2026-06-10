@@ -73,6 +73,8 @@ def train_and_log(experiment_name, run_name, model_class, param_dist,
         # Log dos melhores parâmetros encontrados
         mlflow.log_params(search.best_params_)
         mlflow.log_metric("cv_r2_mean", search.best_score_)
+        cv_r2_std = search.cv_results_["std_test_score"][search.best_index_]
+        mlflow.log_metric("cv_r2_std", cv_r2_std)
 
         # Avaliação final no holdout
         best_model = search.best_estimator_
@@ -84,7 +86,7 @@ def train_and_log(experiment_name, run_name, model_class, param_dist,
         mlflow.log_metric("test_R2", r2)
         mlflow.sklearn.log_model(best_model, artifact_path="model")
 
-        print(f"  CV R²={search.best_score_:.4f} | "
+        print(f"  CV R²={search.best_score_:.4f} ± {cv_r2_std:.4f} | "
               f"Holdout MAE={mae:.4f} | Holdout R²={r2:.4f}")
         print(f"  Melhores parâmetros: {search.best_params_}")
 
