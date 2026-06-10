@@ -33,8 +33,9 @@ A solução é composta por:
 ```
 /
 ├── notebooks/
-│   ├── visualizações.ipynb   # Análise Exploratória de Dados (com 7 visualizações)
-│   └── eda.png               # Figura gerada pelo visualizações.ipynb
+│   ├── visualizações.ipynb      # Análise Exploratória de Dados (7 visualizações)
+│   ├── comparacao_modelos.ipynb # Comparação Random Forest vs Decision Tree
+│   └── eda.png                  # Figura gerada pelo visualizações.ipynb
 ├── src/
 │   └── train.py              # Script de treinamento com MLflow
 ├── projeto/                  # Backend Django
