@@ -6,7 +6,7 @@ from rest_framework.response import Response
 from rest_framework import status
 from drf_spectacular.utils import extend_schema
 
-from .serializers import RiskPredictionInputSerializer, RiskPredictionOutputSerializer
+from .serializers import RiskPredictionInputSerializer, RiskPredictionOutputSerializer, ModelMetricsSerializer
 
 # Adiciona o diretório de dados ao path para importar heuristicas.py
 DADOS_DIR = os.path.join(
@@ -55,3 +55,20 @@ class PredictRiskView(APIView):
 
         output = RiskPredictionOutputSerializer(result)
         return Response(output.data, status=status.HTTP_200_OK)
+
+
+@extend_schema(
+    tags=["ML - Métricas do Modelo"],
+    summary="Obter métricas do modelo de ML",
+    description="Retorna as métricas de desempenho (R² e MAE) calculadas no holdout do modelo de produção.",
+    responses={200: ModelMetricsSerializer},
+)
+class ModelMetricsView(APIView):
+    def get(self, request):
+        metrics = heuristicas.get_model_metrics()
+        data = {
+            "r2": metrics.get("R2", 0.0),
+            "mae": metrics.get("MAE", 0.0)
+        }
+        serializer = ModelMetricsSerializer(data)
+        return Response(serializer.data, status=status.HTTP_200_OK)

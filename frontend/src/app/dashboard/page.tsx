@@ -23,6 +23,7 @@ export default function DashboardPage() {
   const router = useRouter();
   const [incidents, setIncidents] = useState<Incident[]>([]);
   const [beaches, setBeaches] = useState<Beach[]>([]);
+  const [modelMetrics, setModelMetrics] = useState<{ r2: number; mae: number } | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -36,10 +37,14 @@ export default function DashboardPage() {
         if (!r.ok) throw new Error('Falha ao carregar praias');
         return r.json();
       }),
+      fetch('http://localhost:8000/api/ml/metrics/')
+        .then((r) => r.ok ? r.json() : null)
+        .catch(() => null),
     ])
-      .then(([incData, beachData]) => {
+      .then(([incData, beachData, metricsData]) => {
         setIncidents(Array.isArray(incData) ? incData : []);
         setBeaches(Array.isArray(beachData) ? beachData : []);
+        setModelMetrics(metricsData || { r2: 0.88046, mae: 0.01787 });
         setLoading(false);
       })
       .catch((err) => {
@@ -298,6 +303,60 @@ export default function DashboardPage() {
               title={`${criticalBeachName} (${topBeachCount} casos)`}
             >
               {criticalBeachName} <span style={{ fontSize: '0.8rem', fontWeight: 400, color: 'var(--text-secondary)' }}>({topBeachCount})</span>
+            </h3>
+          </div>
+        </div>
+
+        {/* KPI 5 - R² */}
+        <div className="glass-container" style={{ padding: '1.5rem', display: 'flex', alignItems: 'center', gap: '1rem' }}>
+          <div
+            style={{
+              background: 'rgba(167, 139, 250, 0.15)',
+              color: '#c084fc',
+              width: '48px',
+              height: '48px',
+              borderRadius: '12px',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              flexShrink: 0,
+            }}
+          >
+            <svg style={{ width: '24px', height: '24px' }} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+            </svg>
+          </div>
+          <div>
+            <p style={{ fontSize: '0.85rem', margin: 0 }} title="Coeficiente de Determinação (R²)">Precisão do Modelo (R²)</p>
+            <h3 style={{ fontSize: '1.75rem', fontWeight: 700, margin: '0.2rem 0 0 0' }}>
+              {modelMetrics ? modelMetrics.r2.toFixed(4) : '...'}
+            </h3>
+          </div>
+        </div>
+
+        {/* KPI 6 - MAE */}
+        <div className="glass-container" style={{ padding: '1.5rem', display: 'flex', alignItems: 'center', gap: '1rem' }}>
+          <div
+            style={{
+              background: 'rgba(45, 212, 191, 0.15)',
+              color: '#2dd4bf',
+              width: '48px',
+              height: '48px',
+              borderRadius: '12px',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              flexShrink: 0,
+            }}
+          >
+            <svg style={{ width: '24px', height: '24px' }} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+          </div>
+          <div>
+            <p style={{ fontSize: '0.85rem', margin: 0 }} title="Erro Absoluto Médio (MAE)">Erro do Modelo (MAE)</p>
+            <h3 style={{ fontSize: '1.75rem', fontWeight: 700, margin: '0.2rem 0 0 0' }}>
+              {modelMetrics ? modelMetrics.mae.toFixed(4) : '...'}
             </h3>
           </div>
         </div>

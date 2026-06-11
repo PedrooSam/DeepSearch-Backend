@@ -69,3 +69,8 @@ class RiskPredictionOutputSerializer(serializers.Serializer):
     risk_level = serializers.CharField(
         help_text="Nível de risco: 'Muito baixo', 'Baixo', 'Moderado' ou 'Alto'."
     )
+
+
+class ModelMetricsSerializer(serializers.Serializer):
+    r2 = serializers.FloatField(help_text="Coeficiente de Determinação (R²).")
+    mae = serializers.FloatField(help_text="Erro Absoluto Médio (MAE).")
