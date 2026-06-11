@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'apps.forecasts',
     'apps.ml',
     'apps.risk',
+    'apps.monitoring',
     'corsheaders',
 ]
 

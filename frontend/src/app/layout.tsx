@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import './globals.css'
 import Link from 'next/link'
+import AlertBadge from './components/AlertBadge'
 
 export const metadata: Metadata = {
   title: 'DeepSearch | Incidências',
@@ -25,6 +26,7 @@ export default function RootLayout({
               <Link href="/dashboard" className="btn btn-secondary">Dashboard</Link>
               <Link href="/" className="btn btn-secondary">Histórico</Link>
               <Link href="/mapa" className="btn btn-secondary">Mapa de Risco</Link>
+              <AlertBadge />
               <Link href="/nova" className="btn btn-primary">+ Nova Incidência</Link>
             </nav>
           </header>

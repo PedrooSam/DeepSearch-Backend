@@ -91,7 +91,7 @@ function IncidentList() {
 
   return (
     <div>
-      <h2>Dashboard de Incidências</h2>
+      <h2>Histórico de Incidências</h2>
       {beachFilter ? (
         <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '1rem' }}>
           <p>Filtrando por: <strong>{getBeachName(Number(beachFilter))}</strong></p>

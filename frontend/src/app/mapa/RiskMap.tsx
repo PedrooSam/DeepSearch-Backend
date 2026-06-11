@@ -41,7 +41,7 @@ export default function RiskMap({ beaches }: { beaches: BeachRisk[] }) {
     <MapContainer
       center={center}
       zoom={12}
-      style={{ height: '500px', width: '100%' }}
+      style={{ height: '75vh', width: '100%' }}
     >
       <TileLayer
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
